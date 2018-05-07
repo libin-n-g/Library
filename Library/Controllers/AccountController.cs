@@ -16,6 +16,7 @@ using Library.Services;
 
 namespace Library.Controllers
 {
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
@@ -24,10 +25,12 @@ namespace Library.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
@@ -35,6 +38,7 @@ namespace Library.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -208,8 +212,19 @@ namespace Library.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
+            var RegisterVM = new RegisterViewModel();
+            if (_roleManager.RoleExistsAsync("Admin").Result)
+            {
+                string[] roles = { "User", "Librarian" };
+                RegisterVM.roles = new SelectList(roles);
+            }
+            else
+            {
+                string[] roles = { "User", "Admin", "Librarian" };
+                RegisterVM.roles = new SelectList(roles);
+            }
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(RegisterVM);
         }
 
         [HttpPost]
@@ -220,9 +235,19 @@ namespace Library.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                if (!await _roleManager.RoleExistsAsync(model.role))
+                {
+                    var Role = new IdentityRole(model.role);
+                    var RoleCreated = await _roleManager.CreateAsync(Role);
+                    if (!RoleCreated.Succeeded)
+                    {
+                        return View(model);
+                    }
+                }
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var role = await _userManager.AddToRoleAsync(user, model.role);
+                if (result.Succeeded && role.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
