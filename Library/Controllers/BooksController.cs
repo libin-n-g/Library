@@ -178,6 +178,7 @@ namespace Library.Controllers
 
             var movies = from m in _context.ApplicationUser
                          select m;
+            // This is not used, can be used if we use select in the view
             IssueVM.Users = new SelectList(await usersQuery.Distinct().ToListAsync());
             return View(IssueVM);
         }
@@ -188,10 +189,17 @@ namespace Library.Controllers
         [Authorize(Roles = "Admin,Librarian,User")]
         public async Task<IActionResult> IssueBook(int id, BooksIssueViewModel IssueBook)
         {
+            
             var book = await _context.Book.SingleOrDefaultAsync(m => m.BookID == id);
             book.Avaliable = false;
-
             var user = await _userManager.FindByNameAsync(IssueBook.Username);
+            var books = _context.Book.Where(m => m.TakenBy.Id == user.Id);
+            if (books.Count() >= 2)
+            {
+                ViewBag.error = "Please return issued books for more books! ";
+                IssueBook.book = book;
+                return View(IssueBook);
+            }
             book.TakenBy = user;
             _context.Book.Update(book);
             await _context.SaveChangesAsync();
@@ -212,7 +220,7 @@ namespace Library.Controllers
             {
                 return NotFound();
             }
-            var book = await _context.Book.SingleOrDefaultAsync(m => m.TakenBy.UserName == id);
+            var book = await _context.Book.SingleOrDefaultAsync(m => m.TakenBy.UserName == id && m.BookID == Bookid);
             if (book == null)
             {
                 return NotFound();
@@ -235,11 +243,13 @@ namespace Library.Controllers
         public async Task<IActionResult> ReturnBook(string id, [Bind("Username,bookID")] ReturnBookViewModel ReturnBook)
         {
 
-            var user = await _userManager.FindByNameAsync(id);
-            var bookid = ReturnBook.bookID;
-            var book = await _context.Book.SingleOrDefaultAsync(m => m.BookID == bookid);
-                //return NotFound(book);
+            var user = await _userManager.FindByNameAsync(ReturnBook.Username);
             if (user == null)
+            {
+                return NotFound();
+            }
+            var book = await _context.Book.SingleOrDefaultAsync(m => m.BookID == ReturnBook.bookID);
+            if(!user.TakenBooks.Contains(book))
             {
                 return NotFound();
             }

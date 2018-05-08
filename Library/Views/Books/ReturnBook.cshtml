@@ -46,8 +46,9 @@
                 <input asp-for="Username" class="form-control" />
             </div>
             <input type="hidden" asp-for="bookID" />
-            <button type="submit" asp-action="ReturnBook"> Return Book</button>
+            <button type="submit" asp-action="ReturnBook" asp-route-id="" > Return Book</button>
         </form>
+
     </div>
 </div>
 

@@ -31,6 +31,7 @@
                     @Html.DisplayNameFor(model => model.Avaliable)
                 </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -52,12 +53,20 @@
                 @Html.DisplayFor(modelItem => item.Avaliable)    
             </td>
             <td>
+                <a asp-action="Details" asp-route-id="@item.BookID">Details</a>
                 @if (!User.IsInRole("User"))
                 {
                     <a asp-action="Edit" asp-route-id="@item.BookID">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.BookID">Delete</a>
                 }
-                <a asp-action="Details" asp-route-id="@item.BookID">Details</a>
+                
+            </td>
+            <td>
+                @if (@item.Avaliable)
+                {
+                    <a asp-action="IssueBook" asp-route-id="@item.BookID">Issue Book</a>
+                }
+                
             </td>
         </tr>
         }

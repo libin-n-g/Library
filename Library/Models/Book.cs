@@ -40,7 +40,7 @@ namespace Library.Models
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
-        [UIHint("YesNo.cshtml")]
+        [UIHint("../Shared/YesNo.cshtml")]
         public bool Avaliable { get; set; }
         
         public virtual ApplicationUser TakenBy { get; set; }
