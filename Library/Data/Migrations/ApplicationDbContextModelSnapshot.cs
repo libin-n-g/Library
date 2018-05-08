@@ -80,6 +80,8 @@ namespace Library.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(60);
 
+                    b.Property<bool>("Avaliable");
+
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasMaxLength(30);
@@ -210,7 +212,7 @@ namespace Library.Data.Migrations
             modelBuilder.Entity("Library.Models.Book", b =>
                 {
                     b.HasOne("Library.Models.ApplicationUser", "TakenBy")
-                        .WithMany("Books")
+                        .WithMany("TakenBooks")
                         .HasForeignKey("TakenById");
                 });
 

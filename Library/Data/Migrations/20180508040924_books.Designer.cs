@@ -11,8 +11,8 @@ using System;
 namespace Library.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180507161311_Books")]
-    partial class Books
+    [Migration("20180508040924_books")]
+    partial class books
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,8 @@ namespace Library.Data.Migrations
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasMaxLength(60);
+
+                    b.Property<bool>("Avaliable");
 
                     b.Property<string>("Genre")
                         .IsRequired()
@@ -211,7 +213,7 @@ namespace Library.Data.Migrations
             modelBuilder.Entity("Library.Models.Book", b =>
                 {
                     b.HasOne("Library.Models.ApplicationUser", "TakenBy")
-                        .WithMany("Books")
+                        .WithMany("TakenBooks")
                         .HasForeignKey("TakenById");
                 });
 

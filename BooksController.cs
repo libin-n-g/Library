@@ -10,8 +10,8 @@ using Library.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
-{
-	[Authorize]
+{   
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,7 +58,7 @@ namespace Library.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Librarian")]
-        public async Task<IActionResult> Create([Bind("BookID,Title,Author,Genre,Price,Avaliable")] Book book)
+        public async Task<IActionResult> Create([Bind("BookID,Title,Author,Genre,Price")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace Library.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Librarian")]
-        public async Task<IActionResult> Edit(int id, [Bind("BookID,Title,Author,Genre,Price,Avaliable")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookID,Title,Author,Genre,Price")] Book book)
         {
             if (id != book.BookID)
             {

@@ -8,6 +8,22 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20180507160919_Init.cs" />
     <Compile Remove="Data\Migrations\20180507160919_Init.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180507161311_Books.cs" />
+    <Compile Remove="Data\Migrations\20180507161311_Books.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180507170854_BookedBy.cs" />
+    <Compile Remove="Data\Migrations\20180507170854_BookedBy.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180507171301_Books.cs" />
+    <Compile Remove="Data\Migrations\20180507171301_Books.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180507171807_Book_s.cs" />
+    <Compile Remove="Data\Migrations\20180507171807_Book_s.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180507183021_includes_booked_by.cs" />
+    <Compile Remove="Data\Migrations\20180507183021_includes_booked_by.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180508034454_books.cs" />
+    <Compile Remove="Data\Migrations\20180508034454_books.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180508035331_books.cs" />
+    <Compile Remove="Data\Migrations\20180508035331_books.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180508035823_books.cs" />
+    <Compile Remove="Data\Migrations\20180508035823_books.Designer.cs" />
   </ItemGroup>
 
 

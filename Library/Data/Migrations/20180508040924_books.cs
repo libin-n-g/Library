@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Library.Data.Migrations
 {
-    public partial class Books : Migration
+    public partial class books : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,7 @@ namespace Library.Data.Migrations
                     BookID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Author = table.Column<string>(maxLength: 60, nullable: false),
+                    Avaliable = table.Column<bool>(nullable: false),
                     Genre = table.Column<string>(maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     TakenById = table.Column<string>(nullable: true),
