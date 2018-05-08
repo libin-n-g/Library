@@ -24,5 +24,7 @@ namespace Library.Data
         }
 
         public DbSet<Library.Models.Book> Book { get; set; }
+
+        public DbSet<Library.Models.ApplicationUser> ApplicationUser { get; set; }
     }
 }

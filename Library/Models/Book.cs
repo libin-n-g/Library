@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,18 @@ using System.Threading.Tasks;
 
 namespace Library.Models
 {
+    public class BooksIssueViewModel
+    {
+        public Book book;
+        public SelectList Users;
+        public string Username { get; set; }
+    }
+    public class ReturnBookViewModel
+    {
+        public int bookID { get; set; }
+        public string Username { get; set; }
+        public Book book;
+    }
     public class Book
     {
         public int BookID { get; set; }

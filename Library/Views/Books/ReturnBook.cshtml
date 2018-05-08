@@ -1,0 +1,56 @@
+﻿@model Library.Models.ReturnBookViewModel
+@{
+    ViewData["Title"] = "Return Book";
+}
+
+<h2>Issue Book</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.book.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.book.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.book.Author)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.book.Author)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.book.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.book.Genre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.book.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.book.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.book.Avaliable)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.book.Avaliable)
+            </dd>
+        </dl>
+        <form asp-controller="Books" asp-action="ReturnBook" method="post">
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <input type="hidden" asp-for="bookID" />
+            <button type="submit" asp-action="ReturnBook"> Return Book</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

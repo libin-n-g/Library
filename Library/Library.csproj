@@ -24,6 +24,10 @@
     <Compile Remove="Data\Migrations\20180508035331_books.Designer.cs" />
     <Compile Remove="Data\Migrations\20180508035823_books.cs" />
     <Compile Remove="Data\Migrations\20180508035823_books.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180508111657_test.cs" />
+    <Compile Remove="Data\Migrations\20180508111657_test.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180508112251_test.cs" />
+    <Compile Remove="Data\Migrations\20180508112251_test.Designer.cs" />
   </ItemGroup>
 
 

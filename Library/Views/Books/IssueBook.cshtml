@@ -1,0 +1,50 @@
+﻿@model Library.Models.BooksIssueViewModel
+@{
+    ViewData["Title"] = "Issue Book";
+}
+
+<h2>Issue Book</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Books" asp-action="IssueBook" method="post">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.book.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.book.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.book.Author)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.book.Author)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.book.Genre)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.book.Genre)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.book.Price)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.book.Price)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.book.Avaliable)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.book.Avaliable)
+                </dd>
+            </dl>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <input type="submit" value="IssueBook" />
+        </form>
+    </div>
+</div>
