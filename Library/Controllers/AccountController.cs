@@ -116,14 +116,14 @@ namespace Library.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             var RegisterVM = new RegisterViewModel();
-            if (_roleManager.RoleExistsAsync("Admin").Result)
+            if (_roleManager.RoleExistsAsync("Librarian").Result)
             {
-                string[] roles = { "User", "Librarian" };
+                string[] roles = { "User"};
                 RegisterVM.roles = new SelectList(roles);
             }
             else
             {
-                string[] roles = { "User", "Admin", "Librarian" };
+                string[] roles = { "Librarian", "User" };
                 RegisterVM.roles = new SelectList(roles);
             }
             ViewData["ReturnUrl"] = returnUrl;
