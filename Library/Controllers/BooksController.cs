@@ -157,7 +157,7 @@ namespace Library.Controllers
         }
         
         // GET: Books/IssueBook/5
-        [Authorize(Roles = "Admin,Librarian, User")]
+        [Authorize(Roles = "Admin,Librarian")]
         public async Task<IActionResult> IssueBook(int? id)
         {
             if (id == null)
@@ -186,7 +186,7 @@ namespace Library.Controllers
         // POST: Books/IssueBook/5
         [HttpPost, ActionName("IssueBook")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Librarian,User")]
+        [Authorize(Roles = "Admin,Librarian")]
         public async Task<IActionResult> IssueBook(int id, BooksIssueViewModel IssueBook)
         {
             
@@ -208,7 +208,7 @@ namespace Library.Controllers
 
 
         // GET: Books/ReturnBook/5
-        [Authorize(Roles = "Admin,Librarian, User")]
+        [Authorize(Roles = "Admin,Librarian")]
         public async Task<IActionResult> ReturnBook(string id, int Bookid)
         {
             if (id == null)
@@ -232,14 +232,14 @@ namespace Library.Controllers
             ReturnBookViewModel IssueVM = new ReturnBookViewModel();
             IssueVM.book = book;
             IssueVM.Username = user.UserName;
-            IssueVM.bookID = book.BookID;
+            IssueVM.BookID = book.BookID;
             return View(IssueVM);
         }
 
         // POST: Books/IssueBook/5
         [HttpPost, ActionName("ReturnBook")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Librarian,User")]
+        [Authorize(Roles = "Admin,Librarian")]
         public async Task<IActionResult> ReturnBook(string id, [Bind("Username,bookID")] ReturnBookViewModel ReturnBook)
         {
 
@@ -248,7 +248,7 @@ namespace Library.Controllers
             {
                 return NotFound();
             }
-            var book = await _context.Book.SingleOrDefaultAsync(m => m.BookID == ReturnBook.bookID);
+            var book = await _context.Book.SingleOrDefaultAsync(m => m.BookID == ReturnBook.BookID);
             if(!user.TakenBooks.Contains(book))
             {
                 return NotFound();

@@ -11,7 +11,19 @@
 }
 
 <h2>Issued Books</h2>
+<div class="row">
+    <div class="col-lg-4 col-md-12" >
+        <p>
+            User :  @Html.DisplayFor(model => model.UserName)
+        </p>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <p>
+            Email :  @Html.DisplayFor(model => model.Email)
+        </p>
+    </div>
 
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -53,7 +65,10 @@
                     <a asp-controller="Books" asp-action="Details" asp-route-id="@item.BookID">Details</a>
                 </td>
                 <td>
-                    <a href=@Url.Action("ReturnBook", "Books", new { id=UserManager.GetUserName(User), Bookid = item.BookID })>Return Book</a>
+                    @if (!User.IsInRole("User"))
+                    {
+                    <a href=@Url.Action("ReturnBook", "Books", new { id = UserManager.GetUserName(User), Bookid = item.BookID })>Return Book</a>
+                    }
                 </td>
             </tr>
         }

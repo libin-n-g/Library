@@ -44,6 +44,22 @@ namespace Library.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
+        public IActionResult Index()
+        {
+            var users = _userManager.Users.ToList();
+            List<AccountRoleView> accountRoleVMs = new List<AccountRoleView>();
+            foreach (ApplicationUser u in users)
+            {
+                AccountRoleView accountRoleVM = new AccountRoleView
+                {
+                    User = u,
+                    Roles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
+                };
+                accountRoleVMs.Add(accountRoleVM);
+            }
+            return View(accountRoleVMs);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)

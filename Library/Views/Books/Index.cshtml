@@ -62,7 +62,7 @@
                 
             </td>
             <td>
-                @if (@item.Avaliable)
+                @if (@item.Avaliable && !User.IsInRole("User"))
                 {
                     <a asp-action="IssueBook" asp-route-id="@item.BookID">Issue Book</a>
                 }

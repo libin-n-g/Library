@@ -23,9 +23,13 @@ namespace Library.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(string id = "")
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            if (id != "")
+            {
+                user = _userManager.FindByNameAsync(id).Result;
+            }
             var books = _context.Book.Where(m => m.TakenBy.Id == user.Id);
             user.TakenBooks = new Collection<Book>(books.ToList());
             return View(user);

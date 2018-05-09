@@ -17,7 +17,7 @@ namespace Library.Models
     }
     public class ReturnBookViewModel
     {
-        public int bookID { get; set; }
+        public int BookID { get; set; }
         public string Username { get; set; }
         public Book book;
     }
@@ -42,7 +42,8 @@ namespace Library.Models
 
         [UIHint("../Shared/YesNo.cshtml")]
         public bool Avaliable { get; set; }
-        
+
+        //public virtual ICollection<ApplicationUser> TakenBy { get; set; }
         public virtual ApplicationUser TakenBy { get; set; }
     }
 }
